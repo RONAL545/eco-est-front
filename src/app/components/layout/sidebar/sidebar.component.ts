@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
@@ -14,6 +14,8 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+  @Output() menuItemClick = new EventEmitter<void>();
+
   menuItems = [
     { path: '/dashboard', icon: 'dashboard', label: 'Datos' },
     { path: '/segregacion', icon: 'pie_chart', label: 'Segregación' },
@@ -24,6 +26,10 @@ export class SidebarComponent {
     public authService: AuthService,
     private router: Router
   ) {}
+
+  onMenuItemClick(): void {
+    this.menuItemClick.emit();
+  }
 
   logout(): void {
     this.authService.logout();

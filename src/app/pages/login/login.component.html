@@ -1,53 +1,75 @@
 <div class="login-wrapper">
   <!-- Left Panel - Login Form -->
   <div class="login-panel">
-    <div class="login-content">
-      <h1 class="login-title">Inicio de sesión</h1>
-      <p class="login-subtitle">
-        Sistema de reportes de residuos de la <strong>UNAJ</strong>
-      </p>
+    <mat-card class="login-card">
+      <mat-card-header class="card-header">
+        <mat-card-title class="login-title">Inicio de sesión</mat-card-title>
+        <mat-card-subtitle class="login-subtitle">
+          Sistema de reportes de residuos de la <strong>UNAJ</strong>
+        </mat-card-subtitle>
+      </mat-card-header>
 
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-        <div class="form-group">
-          <label class="form-label">usuario</label>
-          <input
-            type="text"
-            class="form-input"
-            formControlName="usuario"
-            placeholder="admin"
-            autocomplete="username">
+      <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Usuario</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="usuario"
+              placeholder="admin"
+              autocomplete="username">
+            <mat-icon matPrefix>person</mat-icon>
+            <mat-error *ngIf="loginForm.get('usuario')?.hasError('required')">
+              El usuario es requerido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Contraseña</mat-label>
+            <input
+              matInput
+              [type]="hidePassword ? 'password' : 'text'"
+              formControlName="contrasena"
+              placeholder="Ingrese su contraseña"
+              autocomplete="current-password">
+            <mat-icon matPrefix>lock</mat-icon>
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.get('contrasena')?.hasError('required')">
+              La contraseña es requerida
+            </mat-error>
+          </mat-form-field>
+
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="login-btn full-width"
+            [disabled]="loading || loginForm.invalid">
+            <span *ngIf="!loading">Iniciar sesión</span>
+            <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+          </button>
+        </form>
+
+        <div class="login-footer">
+          <p>¿No tienes cuenta? <a href="#" class="link">Acércate al administrador</a></p>
         </div>
+      </mat-card-content>
 
-        <div class="form-group">
-          <label class="form-label">contraseña</label>
-          <input
-            [type]="hidePassword ? 'password' : 'text'"
-            class="form-input"
-            formControlName="contrasena"
-            placeholder="ingrese su contraseña"
-            autocomplete="current-password">
-        </div>
-
-        <button
-          type="submit"
-          class="login-btn"
-          [disabled]="loading || loginForm.invalid">
-          <span *ngIf="!loading">Iniciar sesión</span>
-          <mat-spinner *ngIf="loading" diameter="20" class="button-spinner"></mat-spinner>
-        </button>
-      </form>
-
-      <div class="login-footer">
-        <p>si no tienes cuenta <a href="#" class="link">acercate al administrador</a></p>
-      </div>
-
-      <div class="unaj-logo">
-        <img src="assets/unaj-logo.png" alt="UNAJ" *ngIf="false">
-        <div class="logo-text">
+      <mat-card-footer class="card-footer">
+        <div class="unaj-logo">
           <span class="logo-unaj">UNIVERSIDAD NACIONAL DE JALÁCA</span>
         </div>
-      </div>
-    </div>
+      </mat-card-footer>
+    </mat-card>
   </div>
 
   <!-- Right Panel - Banner -->
@@ -65,11 +87,11 @@
         </div>
       </div>
 
-      <div class="recycle-steps">
-        <div class="step">REUSE.</div>
-        <div class="step">RECYCLE.</div>
-        <div class="step">REPEAT.</div>
-      </div>
+      <mat-chip-set class="recycle-steps" aria-label="Pasos de reciclaje">
+        <mat-chip class="step-chip">REUSE.</mat-chip>
+        <mat-chip class="step-chip">RECYCLE.</mat-chip>
+        <mat-chip class="step-chip">REPEAT.</mat-chip>
+      </mat-chip-set>
     </div>
   </div>
 </div>

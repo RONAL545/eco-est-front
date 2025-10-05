@@ -1,9 +1,21 @@
 <mat-toolbar class="header">
   <div class="header-content">
+    <!-- Menu Button (Mobile) -->
+    <button
+      *ngIf="isMobile"
+      mat-icon-button
+      class="menu-button"
+      (click)="toggleMenu()"
+      aria-label="Toggle menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- Page Title -->
     <div class="page-title">
       <h2>{{ getPageTitle() }}</h2>
     </div>
 
+    <!-- Header Actions -->
     <div class="header-actions">
       <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-button">
         <mat-icon>account_circle</mat-icon>

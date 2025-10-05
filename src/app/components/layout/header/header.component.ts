@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,6 +16,9 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  @Input() isMobile = false;
+  @Output() menuToggle = new EventEmitter<void>();
+
   constructor(
     public authService: AuthService,
     private router: Router
@@ -31,5 +34,9 @@ export class HeaderComponent {
     if (url.includes('users')) return 'Gestión de Usuarios';
     if (url.includes('segregacion')) return 'Segregación';
     return 'DATOS DE RECICLAJE';
+  }
+
+  toggleMenu(): void {
+    this.menuToggle.emit();
   }
 }
