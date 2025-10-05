@@ -1,0 +1,31 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo-container">
+      <mat-icon class="logo-icon">eco</mat-icon>
+      <div class="logo-text">
+        <span class="logo-unaj">Unaj</span>
+        <span class="logo-separator">-</span>
+        <span class="logo-ecotec">Ecotec</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <mat-list>
+      <mat-list-item *ngFor="let item of menuItems"
+                     [routerLink]="item.path"
+                     routerLinkActive="active"
+                     class="nav-item">
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle>{{ item.label }}</span>
+      </mat-list-item>
+    </mat-list>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button mat-button class="logout-button" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Cerrar sesión</span>
+    </button>
+  </div>
+</div>

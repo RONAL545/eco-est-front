@@ -1,0 +1,89 @@
+<div class="dashboard-container">
+  <mat-card class="filter-card">
+    <div class="filters">
+      <mat-form-field appearance="outline">
+        <mat-label>Sede - Pabellón</mat-label>
+        <mat-select>
+          <mat-option value="general">General</mat-option>
+          <mat-option value="santa-catalina">Santa Catalina</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Pabellón - Espacio</mat-label>
+        <mat-select>
+          <mat-option value="todos">Todos</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" (click)="exportData()">
+        Exportar como .xls
+      </button>
+    </div>
+  </mat-card>
+
+  <div class="content-grid">
+    <mat-card class="table-card">
+      <h3>Datos de Reciclaje por Pabellón</h3>
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" class="data-table">
+          <ng-container matColumnDef="pabellon">
+            <th mat-header-cell *matHeaderCellDef>Pabellón</th>
+            <td mat-cell *matCellDef="let row">{{row.pabellon}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="plastico">
+            <th mat-header-cell *matHeaderCellDef>Plástico (kg)</th>
+            <td mat-cell *matCellDef="let row">{{row.plastico}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="carton">
+            <th mat-header-cell *matHeaderCellDef>Cartón o Papel (kg)</th>
+            <td mat-cell *matCellDef="let row">{{row.carton}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="vidrio">
+            <th mat-header-cell *matHeaderCellDef>Vidrio (kg)</th>
+            <td mat-cell *matCellDef="let row">{{row.vidrio}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="organico">
+            <th mat-header-cell *matHeaderCellDef>R. Orgánico (kg)</th>
+            <td mat-cell *matCellDef="let row">{{row.organico}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="metal">
+            <th mat-header-cell *matHeaderCellDef>Metal (kg)</th>
+            <td mat-cell *matCellDef="let row">{{row.metal}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="no_aprovechable">
+            <th mat-header-cell *matHeaderCellDef>R. No Aprovechables (kg)</th>
+            <td mat-cell *matCellDef="let row">{{row.no_aprovechable}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card>
+
+    <mat-card class="chart-card">
+      <h3>Total de residuos en porcentaje por categoría</h3>
+      <div class="chart-wrapper">
+        <canvas baseChart
+                [data]="pieChartData"
+                [options]="pieChartOptions"
+                type="pie">
+        </canvas>
+      </div>
+    </mat-card>
+  </div>
+</div>
