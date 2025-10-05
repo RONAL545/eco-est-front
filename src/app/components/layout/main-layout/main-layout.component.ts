@@ -76,12 +76,13 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class MainLayoutComponent {
   @ViewChild('drawer') drawer!: MatSidenav;
+  isHandset$: Observable<boolean>;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet])
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
-
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    this.isHandset$ = this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet])
+      .pipe(
+        map(result => result.matches),
+        shareReplay()
+      );
+  }
 }
