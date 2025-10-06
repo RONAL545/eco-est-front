@@ -1,97 +1,87 @@
-<div class="login-wrapper">
-  <!-- Left Panel - Login Form -->
-  <div class="login-panel">
-    <mat-card class="login-card">
-      <mat-card-header class="card-header">
-        <mat-card-title class="login-title">Inicio de sesión</mat-card-title>
-        <mat-card-subtitle class="login-subtitle">
-          Sistema de reportes de residuos de la <strong>UNAJ</strong>
-        </mat-card-subtitle>
-      </mat-card-header>
-
-      <mat-card-content>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Usuario</mat-label>
-            <input
-              matInput
-              type="text"
-              formControlName="usuario"
-              placeholder="admin"
-              autocomplete="username">
-            <mat-icon matPrefix>person</mat-icon>
-            <mat-error *ngIf="loginForm.get('usuario')?.hasError('required')">
-              El usuario es requerido
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Contraseña</mat-label>
-            <input
-              matInput
-              [type]="hidePassword ? 'password' : 'text'"
-              formControlName="contrasena"
-              placeholder="Ingrese su contraseña"
-              autocomplete="current-password">
-            <mat-icon matPrefix>lock</mat-icon>
-            <button
-              mat-icon-button
-              matSuffix
-              type="button"
-              (click)="hidePassword = !hidePassword"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hidePassword">
-              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-            <mat-error *ngIf="loginForm.get('contrasena')?.hasError('required')">
-              La contraseña es requerida
-            </mat-error>
-          </mat-form-field>
-
-          <button
-            mat-raised-button
-            color="primary"
-            type="submit"
-            class="login-btn full-width"
-            [disabled]="loading || loginForm.invalid">
-            <span *ngIf="!loading">Iniciar sesión</span>
-            <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
-          </button>
-        </form>
-
-        <div class="login-footer">
-          <p>¿No tienes cuenta? <a href="#" class="link">Acércate al administrador</a></p>
-        </div>
-      </mat-card-content>
-
-      <mat-card-footer class="card-footer">
-        <div class="unaj-logo">
-          <span class="logo-unaj">UNIVERSIDAD NACIONAL DE JALÁCA</span>
-        </div>
-      </mat-card-footer>
-    </mat-card>
-  </div>
-
-  <!-- Right Panel - Banner -->
-  <div class="banner-panel">
-    <div class="banner-content">
-      <div class="ecotec-logo">
-        <div class="logo-circle">
-          <mat-icon class="eco-icon">eco</mat-icon>
-          <div class="recycle-icon">♻️</div>
-        </div>
-        <div class="logo-title">
-          <h1>EcoTec</h1>
-          <h2>UNAJ</h2>
-          <p>GESTIÓN INTELIGENTE DE RESIDUOS</p>
+<div class="login-container">
+  <!-- Left Panel - Image -->
+  <div class="image-panel">
+    <div class="image-overlay">
+      <img src="assets/images/unaj-logo.png" alt="Universidad UNAJ" class="unaj-image">
+      <div class="image-content">
+        <h1 class="university-name">UNAJ</h1>
+        <p class="university-subtitle">Universidad Nacional Arturo Jauretche</p>
+        <div class="eco-badge">
+          <lucide-icon [img]="Leaf" class="eco-icon"></lucide-icon>
+          <span>Sistema de Gestión Ambiental</span>
         </div>
       </div>
+    </div>
+  </div>
 
-      <mat-chip-set class="recycle-steps" aria-label="Pasos de reciclaje">
-        <mat-chip class="step-chip">REUSE.</mat-chip>
-        <mat-chip class="step-chip">RECYCLE.</mat-chip>
-        <mat-chip class="step-chip">REPEAT.</mat-chip>
-      </mat-chip-set>
+  <!-- Right Panel - Login Form -->
+  <div class="form-panel">
+    <div class="form-wrapper">
+      <div class="form-header">
+        <div class="header-icon">
+          <lucide-icon [img]="Lock" class="lock-icon"></lucide-icon>
+        </div>
+        <h2 class="form-title">Iniciar Sesión</h2>
+        <p class="form-subtitle">Sistema de Reportes de Residuos</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Usuario</mat-label>
+          <lucide-icon [img]="User" matPrefix class="input-icon"></lucide-icon>
+          <input
+            matInput
+            type="text"
+            formControlName="usuario"
+            placeholder="Ingrese su usuario"
+            autocomplete="username">
+          <mat-error *ngIf="loginForm.get('usuario')?.hasError('required')">
+            El usuario es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Contraseña</mat-label>
+          <lucide-icon [img]="KeyRound" matPrefix class="input-icon"></lucide-icon>
+          <input
+            matInput
+            [type]="hidePassword ? 'password' : 'text'"
+            formControlName="contrasena"
+            placeholder="Ingrese su contraseña"
+            autocomplete="current-password">
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="hidePassword = !hidePassword"
+            class="visibility-btn">
+            <lucide-icon [img]="hidePassword ? EyeOff : Eye" class="eye-icon"></lucide-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('contrasena')?.hasError('required')">
+            La contraseña es requerida
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          class="submit-btn"
+          [disabled]="loading || loginForm.invalid">
+          <span *ngIf="!loading" class="btn-content">
+            <lucide-icon [img]="LogIn" class="btn-icon"></lucide-icon>
+            Iniciar Sesión
+          </span>
+          <mat-spinner *ngIf="loading" diameter="24" class="spinner"></mat-spinner>
+        </button>
+      </form>
+
+      <div class="form-footer">
+        <div class="footer-text">
+          <lucide-icon [img]="Info" class="info-icon"></lucide-icon>
+          <p>¿No tienes cuenta? Contacta al administrador del sistema</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

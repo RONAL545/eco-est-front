@@ -6,9 +6,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { LucideAngularModule, Building2, DoorOpen, Calendar, Download, Table2, PieChart } from 'lucide-angular';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration } from 'chart.js';
 
@@ -25,13 +25,22 @@ import { ChartConfiguration } from 'chart.js';
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
-    MatIconModule,
+    MatRippleModule,
+    LucideAngularModule,
     BaseChartDirective
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  // Lucide Icons
+  readonly Building2 = Building2;
+  readonly DoorOpen = DoorOpen;
+  readonly Calendar = Calendar;
+  readonly Download = Download;
+  readonly Table2 = Table2;
+  readonly PieChart = PieChart;
+
   displayedColumns: string[] = ['pabellon', 'plastico', 'carton', 'vidrio', 'organico', 'metal', 'no_aprovechable'];
 
   dataSource = [
@@ -61,3 +70,4 @@ export class DashboardComponent implements OnInit {
     console.log('Exportando datos...');
   }
 }
+

@@ -2,14 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatChipsModule } from '@angular/material/chips';
+import { LucideAngularModule, Lock, User, KeyRound, Eye, EyeOff, LogIn, Info, Leaf } from 'lucide-angular';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -18,22 +16,31 @@ import { AuthService } from '../../services/auth.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    MatChipsModule
+    LucideAngularModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  // Lucide Icons
+  readonly Lock = Lock;
+  readonly User = User;
+  readonly KeyRound = KeyRound;
+  readonly Eye = Eye;
+  readonly EyeOff = EyeOff;
+  readonly LogIn = LogIn;
+  readonly Info = Info;
+  readonly Leaf = Leaf;
+
   loginForm: FormGroup;
   loading = false;
   hidePassword = true;
+
 
   constructor(
     private fb: FormBuilder,

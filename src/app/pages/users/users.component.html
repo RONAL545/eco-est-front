@@ -1,0 +1,107 @@
+<div class="users-container">
+  <!-- Filter Section -->
+  <div class="filters-section">
+    <div class="filters-row">
+      <mat-form-field appearance="outline" class="search-input">
+        <mat-label>Buscar por nombre o sede</mat-label>
+        <lucide-icon [img]="Search" matPrefix class="prefix-icon"></lucide-icon>
+        <input matInput>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" class="action-button">
+        <lucide-icon [img]="UserPlus" class="button-icon"></lucide-icon>
+        Personal
+      </button>
+
+      <button mat-flat-button class="action-button secondary-button">
+        <lucide-icon [img]="Users" class="button-icon"></lucide-icon>
+        Voluntario
+      </button>
+    </div>
+  </div>
+
+  <!-- Table Card -->
+  <mat-card class="table-card">
+    <mat-card-header>
+      <div class="card-title-wrapper">
+        <div class="title-icon-wrapper">
+          <lucide-icon [img]="UsersIcon" class="title-icon"></lucide-icon>
+        </div>
+        <mat-card-title>Gestión de Usuarios</mat-card-title>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- Vista Desktop: Tabla -->
+      <div class="table-container desktop-table">
+        <table mat-table [dataSource]="users" class="data-table">
+          <ng-container matColumnDef="ocupacion">
+            <th mat-header-cell *matHeaderCellDef>Ocupación</th>
+            <td mat-cell *matCellDef="let user" class="cell-ocupacion">{{user.ocupacion}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="usuario">
+            <th mat-header-cell *matHeaderCellDef>Usuario</th>
+            <td mat-cell *matCellDef="let user">{{user.usuario}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="sede">
+            <th mat-header-cell *matHeaderCellDef>Sede</th>
+            <td mat-cell *matCellDef="let user">{{user.sede}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef>Última Fecha</th>
+            <td mat-cell *matCellDef="let user">{{user.fecha}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let user" class="actions-cell">
+              <button mat-icon-button class="icon-btn edit-btn">
+                <lucide-icon [img]="Edit" class="action-icon"></lucide-icon>
+              </button>
+              <button mat-icon-button class="icon-btn delete-btn">
+                <lucide-icon [img]="Trash2" class="action-icon"></lucide-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+        </table>
+      </div>
+
+      <!-- Vista Mobile: Cards -->
+      <div class="mobile-cards">
+        <div class="data-card" *ngFor="let user of users">
+          <div class="data-card-header">
+            <h3>{{ user.usuario }}</h3>
+            <span class="ocupacion-badge" [class.personal]="user.ocupacion === 'PERSONAL'">
+              {{ user.ocupacion }}
+            </span>
+          </div>
+          <div class="data-card-body">
+            <div class="data-row">
+              <span class="data-label">Sede:</span>
+              <span class="data-value">{{ user.sede }}</span>
+            </div>
+            <div class="data-row">
+              <span class="data-label">Última Fecha:</span>
+              <span class="data-value">{{ user.fecha }}</span>
+            </div>
+            <div class="data-row actions-row">
+              <button mat-raised-button color="primary" class="mobile-action-btn">
+                <lucide-icon [img]="Edit" class="mobile-icon"></lucide-icon>
+                Editar
+              </button>
+              <button mat-raised-button color="warn" class="mobile-action-btn">
+                <lucide-icon [img]="Trash2" class="mobile-icon"></lucide-icon>
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

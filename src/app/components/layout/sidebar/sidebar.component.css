@@ -1,117 +1,225 @@
 .sidebar {
   height: 100%;
   width: 100%;
-  background: linear-gradient(180deg, #1e3a8a 0%, #0f172a 100%);
+  background: linear-gradient(180deg, #052795 0%, #031a5e 100%);
   color: white;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Efecto de fondo decorativo */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ============ HEADER ============ */
 .sidebar-header {
-  padding: 24px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 28px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 1;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+}
+
+.logo-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.logo-icon-wrapper:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
 }
 
 .logo-icon {
-  font-size: 40px;
-  width: 40px;
-  height: 40px;
+  width: 28px !important;
+  height: 28px !important;
   color: #10b981;
+  stroke-width: 2.5;
 }
 
 .logo-text {
   display: flex;
-  align-items: baseline;
-  font-weight: 500;
-  font-size: 20px;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.logo-unaj {
+.logo-brand {
+  font-size: 22px;
+  font-weight: 700;
   color: white;
+  letter-spacing: -0.5px;
+  line-height: 1;
 }
 
-.logo-separator {
-  margin: 0 4px;
-  color: #fbbf24;
+.logo-subtitle {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
-.logo-ecotec {
-  color: #fbbf24;
-}
-
+/* ============ NAVIGATION ============ */
 .sidebar-nav {
   flex: 1;
-  padding: 16px 0;
+  padding: 20px 12px;
   overflow-y: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.nav-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .nav-item {
-  margin: 4px 8px;
-  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.75);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: white;
+  border-radius: 0 3px 3px 0;
+  transition: height 0.3s ease;
 }
 
 .nav-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   color: white;
+  transform: translateX(4px);
+}
+
+.nav-item:hover::before {
+  height: 60%;
 }
 
 .nav-item.active {
-  background-color: #fbbf24;
-  color: #0f172a;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
   font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.nav-item mat-icon {
-  color: inherit;
+.nav-item.active::before {
+  height: 70%;
+  background: #10b981;
 }
 
-.sidebar-footer {
-  padding: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.logout-button {
-  width: 100%;
-  color: rgba(255, 255, 255, 0.8);
+.nav-item-content {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px;
-  transition: all 0.3s ease;
+  gap: 14px;
+  width: 100%;
 }
 
-.logout-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
+.nav-icon {
+  width: 22px !important;
+  height: 22px !important;
+  stroke-width: 2;
+  flex-shrink: 0;
 }
 
-.logout-button mat-icon {
-  margin-right: 8px;
+.nav-label {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
 }
 
-/* Scrollbar for nav */
+/* Footer removido - Cerrar sesión ahora está en el header */
+
+/* ============ SCROLLBAR ============ */
 .sidebar-nav::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 .sidebar-nav::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
 }
 
 .sidebar-nav::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  transition: background 0.3s ease;
 }
 
 .sidebar-nav::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .sidebar-header {
+    padding: 20px 16px;
+  }
+
+  .logo-icon-wrapper {
+    width: 42px;
+    height: 42px;
+  }
+
+  .logo-icon {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .logo-brand {
+    font-size: 20px;
+  }
+
+  .sidebar-nav {
+    padding: 16px 10px;
+  }
+
+  .nav-item {
+    padding: 12px 14px;
+  }
+
+  .nav-icon {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .nav-label {
+    font-size: 14px;
+  }
 }

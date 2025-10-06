@@ -1,37 +1,33 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { AuthService } from '../../../services/auth.service';
+import { RouterModule } from '@angular/router';
+import { MatRippleModule } from '@angular/material/core';
+import { LucideAngularModule, BarChart3, PieChart, Users, Leaf } from 'lucide-angular';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatListModule, MatIconModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatRippleModule,
+    LucideAngularModule
+  ],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-  @Output() menuItemClick = new EventEmitter<void>();
+  @Input() isMobile = false;
+
+  // Lucide Icons
+  readonly BarChart3 = BarChart3;
+  readonly PieChart = PieChart;
+  readonly Users = Users;
+  readonly Leaf = Leaf;
 
   menuItems = [
-    { path: '/dashboard', icon: 'dashboard', label: 'Datos' },
-    { path: '/segregacion', icon: 'pie_chart', label: 'Segregación' },
-    { path: '/users', icon: 'people', label: 'Usuarios' }
+    { path: '/dashboard', icon: BarChart3, label: 'Dashboard' },
+    { path: '/segregacion', icon: PieChart, label: 'Segregación' },
+    { path: '/users', icon: Users, label: 'Usuarios' }
   ];
-
-  constructor(
-    public authService: AuthService,
-    private router: Router
-  ) {}
-
-  onMenuItemClick(): void {
-    this.menuItemClick.emit();
-  }
-
-  logout(): void {
-    this.authService.logout();
-  }
 }

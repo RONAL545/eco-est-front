@@ -31,14 +31,15 @@ import { map, shareReplay } from 'rxjs/operators';
         class="sidenav"
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'"
-        [opened]="!(isHandset$ | async)">
-        <app-sidebar (menuItemClick)="drawer.close()"></app-sidebar>
+        [opened]="!(isHandset$ | async)"
+        [disableClose]="!(isHandset$ | async)">
+        <app-sidebar [isMobile]="(isHandset$ | async) || false"></app-sidebar>
       </mat-sidenav>
 
       <mat-sidenav-content>
         <app-header
           [isMobile]="(isHandset$ | async) || false"
-          (menuToggle)="drawer.toggle()">
+          (menuToggle)="onMenuToggle()">
         </app-header>
         <div class="content-area">
           <router-outlet></router-outlet>
@@ -49,27 +50,43 @@ import { map, shareReplay } from 'rxjs/operators';
   styles: [`
     .sidenav-container {
       height: 100vh;
+      background: #f8fafc;
     }
 
     .sidenav {
-      width: var(--sidebar-width);
+      width: 260px;
+      border: none;
+      box-shadow: 2px 0 12px rgba(5, 39, 149, 0.08);
+    }
+
+    mat-sidenav-content {
+      background: #f8fafc;
     }
 
     .content-area {
-      padding: 24px;
+      padding: 0;
       min-height: calc(100vh - 64px);
       background: #f8fafc;
     }
 
+    /* Override Material Sidenav backdrop */
+    ::ng-deep .mat-drawer-backdrop.mat-drawer-shown {
+      background-color: rgba(5, 39, 149, 0.5);
+    }
+
     @media (max-width: 768px) {
+      .sidenav {
+        width: 280px;
+      }
+
       .content-area {
-        padding: 16px;
+        min-height: calc(100vh - 60px);
       }
     }
 
     @media (max-width: 600px) {
-      .content-area {
-        padding: 12px;
+      .sidenav {
+        width: 260px;
       }
     }
   `]
@@ -84,5 +101,9 @@ export class MainLayoutComponent {
         map(result => result.matches),
         shareReplay()
       );
+  }
+
+  onMenuToggle(): void {
+    this.drawer.toggle();
   }
 }

@@ -1,109 +1,141 @@
 <div class="dashboard-container">
-  <!-- Filters Card -->
-  <mat-card class="filter-card elevation-2">
-    <mat-card-header>
-      <mat-card-title>
-        <mat-icon>filter_list</mat-icon>
-        Filtros
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="filters">
-        <mat-form-field appearance="outline" class="filter-field">
-          <mat-label>Sede - Pabellón</mat-label>
-          <mat-icon matPrefix>business</mat-icon>
-          <mat-select>
-            <mat-option value="general">General</mat-option>
-            <mat-option value="santa-catalina">Santa Catalina</mat-option>
-          </mat-select>
-        </mat-form-field>
+  <!-- Filters Section -->
+  <div class="filters-section">
+    <div class="filters-row">
+      <mat-form-field appearance="outline" class="filter-input">
+        <mat-label>Sede - Pabellón</mat-label>
+        <lucide-icon [img]="Building2" matPrefix class="prefix-icon"></lucide-icon>
+        <mat-select>
+          <mat-option value="general">General</mat-option>
+          <mat-option value="santa-catalina">Santa Catalina</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline" class="filter-field">
-          <mat-label>Pabellón - Espacio</mat-label>
-          <mat-icon matPrefix>meeting_room</mat-icon>
-          <mat-select>
-            <mat-option value="todos">Todos</mat-option>
-          </mat-select>
-        </mat-form-field>
+      <mat-form-field appearance="outline" class="filter-input">
+        <mat-label>Pabellón - Espacio</mat-label>
+        <lucide-icon [img]="DoorOpen" matPrefix class="prefix-icon"></lucide-icon>
+        <mat-select>
+          <mat-option value="todos">Todos</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline" class="filter-field">
-          <mat-label>Fecha</mat-label>
-          <mat-icon matPrefix>event</mat-icon>
-          <input matInput [matDatepicker]="picker">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+      <mat-form-field appearance="outline" class="filter-input">
+        <mat-label>Fecha</mat-label>
+        <lucide-icon [img]="Calendar" matPrefix class="prefix-icon"></lucide-icon>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
-        <button mat-raised-button color="accent" class="export-btn" (click)="exportData()">
-          <mat-icon>download</mat-icon>
-          <span class="button-text">Exportar .xls</span>
-        </button>
-      </div>
-    </mat-card-content>
-  </mat-card>
+      <button mat-flat-button color="primary" class="action-button" (click)="exportData()">
+        <lucide-icon [img]="Download" class="button-icon"></lucide-icon>
+        Exportar
+      </button>
+    </div>
+  </div>
 
   <!-- Content Grid -->
   <div class="content-grid">
     <!-- Table Card -->
-    <mat-card class="table-card elevation-2">
+    <mat-card class="table-card">
       <mat-card-header>
-        <mat-card-title>
-          <mat-icon>table_chart</mat-icon>
-          Datos de Reciclaje por Pabellón
-        </mat-card-title>
+        <div class="card-title-wrapper">
+          <div class="title-icon-wrapper">
+            <lucide-icon [img]="Table2" class="title-icon"></lucide-icon>
+          </div>
+          <mat-card-title>Datos de Reciclaje por Pabellón</mat-card-title>
+        </div>
       </mat-card-header>
       <mat-card-content>
-        <div class="table-container">
-          <table mat-table [dataSource]="dataSource" class="data-table mat-elevation-z0">
+        <!-- Vista Desktop: Tabla -->
+        <div class="table-container desktop-table">
+          <table mat-table [dataSource]="dataSource" class="data-table">
             <ng-container matColumnDef="pabellon">
               <th mat-header-cell *matHeaderCellDef>Pabellón</th>
-              <td mat-cell *matCellDef="let row">{{row.pabellon}}</td>
+              <td mat-cell *matCellDef="let row" class="cell-pabellon">{{row.pabellon}}</td>
             </ng-container>
 
             <ng-container matColumnDef="plastico">
-              <th mat-header-cell *matHeaderCellDef>Plástico<span class="mobile-hidden"> (kg)</span></th>
-              <td mat-cell *matCellDef="let row">{{row.plastico}}</td>
+              <th mat-header-cell *matHeaderCellDef>Plástico (kg)</th>
+              <td mat-cell *matCellDef="let row" class="cell-value">{{row.plastico}}</td>
             </ng-container>
 
             <ng-container matColumnDef="carton">
-              <th mat-header-cell *matHeaderCellDef>Cartón<span class="mobile-hidden"> o Papel (kg)</span></th>
-              <td mat-cell *matCellDef="let row">{{row.carton}}</td>
+              <th mat-header-cell *matHeaderCellDef>Cartón/Papel (kg)</th>
+              <td mat-cell *matCellDef="let row" class="cell-value">{{row.carton}}</td>
             </ng-container>
 
             <ng-container matColumnDef="vidrio">
-              <th mat-header-cell *matHeaderCellDef>Vidrio<span class="mobile-hidden"> (kg)</span></th>
-              <td mat-cell *matCellDef="let row">{{row.vidrio}}</td>
+              <th mat-header-cell *matHeaderCellDef>Vidrio (kg)</th>
+              <td mat-cell *matCellDef="let row" class="cell-value">{{row.vidrio}}</td>
             </ng-container>
 
             <ng-container matColumnDef="organico">
-              <th mat-header-cell *matHeaderCellDef>R. Org.<span class="mobile-hidden"> (kg)</span></th>
-              <td mat-cell *matCellDef="let row">{{row.organico}}</td>
+              <th mat-header-cell *matHeaderCellDef>R. Orgánico (kg)</th>
+              <td mat-cell *matCellDef="let row" class="cell-value">{{row.organico}}</td>
             </ng-container>
 
             <ng-container matColumnDef="metal">
-              <th mat-header-cell *matHeaderCellDef>Metal<span class="mobile-hidden"> (kg)</span></th>
-              <td mat-cell *matCellDef="let row">{{row.metal}}</td>
+              <th mat-header-cell *matHeaderCellDef>Metal (kg)</th>
+              <td mat-cell *matCellDef="let row" class="cell-value">{{row.metal}}</td>
             </ng-container>
 
             <ng-container matColumnDef="no_aprovechable">
-              <th mat-header-cell *matHeaderCellDef>No Aprov.<span class="mobile-hidden"> (kg)</span></th>
-              <td mat-cell *matCellDef="let row">{{row.no_aprovechable}}</td>
+              <th mat-header-cell *matHeaderCellDef>No Aprovechable (kg)</th>
+              <td mat-cell *matCellDef="let row" class="cell-value">{{row.no_aprovechable}}</td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
           </table>
+        </div>
+
+        <!-- Vista Mobile: Cards -->
+        <div class="mobile-cards">
+          <div class="data-card" *ngFor="let row of dataSource">
+            <div class="data-card-header">
+              <h3>{{ row.pabellon }}</h3>
+            </div>
+            <div class="data-card-body">
+              <div class="data-row">
+                <span class="data-label">Plástico:</span>
+                <span class="data-value">{{ row.plastico }} kg</span>
+              </div>
+              <div class="data-row">
+                <span class="data-label">Cartón/Papel:</span>
+                <span class="data-value">{{ row.carton }} kg</span>
+              </div>
+              <div class="data-row">
+                <span class="data-label">Vidrio:</span>
+                <span class="data-value">{{ row.vidrio }} kg</span>
+              </div>
+              <div class="data-row">
+                <span class="data-label">R. Orgánico:</span>
+                <span class="data-value">{{ row.organico }} kg</span>
+              </div>
+              <div class="data-row">
+                <span class="data-label">Metal:</span>
+                <span class="data-value">{{ row.metal }} kg</span>
+              </div>
+              <div class="data-row">
+                <span class="data-label">No Aprovechable:</span>
+                <span class="data-value">{{ row.no_aprovechable }} kg</span>
+              </div>
+            </div>
+          </div>
         </div>
       </mat-card-content>
     </mat-card>
 
     <!-- Chart Card -->
-    <mat-card class="chart-card elevation-2">
+    <mat-card class="chart-card">
       <mat-card-header>
-        <mat-card-title>
-          <mat-icon>pie_chart</mat-icon>
-          Distribución por Categoría
-        </mat-card-title>
+        <div class="card-title-wrapper">
+          <div class="title-icon-wrapper">
+            <lucide-icon [img]="PieChart" class="title-icon"></lucide-icon>
+          </div>
+          <mat-card-title>Distribución por Categoría</mat-card-title>
+        </div>
       </mat-card-header>
       <mat-card-content>
         <div class="chart-wrapper">

@@ -1,4 +1,4 @@
-.dashboard-container {
+.users-container {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -24,9 +24,9 @@
   flex-wrap: wrap;
 }
 
-.filter-input {
+.search-input {
   flex: 1;
-  min-width: 200px;
+  min-width: 250px;
 }
 
 .prefix-icon {
@@ -48,6 +48,15 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+.secondary-button {
+  background: #10b981 !important;
+  color: white !important;
+}
+
+.secondary-button:hover {
+  background: #059669 !important;
 }
 
 .button-icon {
@@ -118,24 +127,21 @@
   color: #052795;
 }
 
-/* ============ CARDS ============ */
-.table-card,
-.chart-card {
+/* ============ CARD ============ */
+.table-card {
   border-radius: 16px !important;
   box-shadow: 0 4px 12px rgba(5, 39, 149, 0.08) !important;
   border: 1px solid rgba(5, 39, 149, 0.06);
   transition: all 0.3s ease;
 }
 
-.table-card:hover,
-.chart-card:hover {
+.table-card:hover {
   box-shadow: 0 8px 24px rgba(5, 39, 149, 0.12) !important;
   transform: translateY(-2px);
 }
 
-/* ============ CARD HEADERS ============ */
-::ng-deep .table-card .mat-mdc-card-header,
-::ng-deep .chart-card .mat-mdc-card-header {
+/* ============ CARD HEADER ============ */
+::ng-deep .table-card .mat-mdc-card-header {
   padding: 20px 24px 16px !important;
 }
 
@@ -172,16 +178,8 @@
   margin: 0 !important;
 }
 
-::ng-deep .table-card .mat-mdc-card-content,
-::ng-deep .chart-card .mat-mdc-card-content {
+::ng-deep .table-card .mat-mdc-card-content {
   padding: 0 24px 24px !important;
-}
-
-/* ============ CONTENT GRID ============ */
-.content-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 24px;
 }
 
 /* ============ TABLE ============ */
@@ -228,14 +226,42 @@
   background-color: rgba(5, 39, 149, 0.03);
 }
 
-.cell-pabellon {
+.cell-ocupacion {
   font-weight: 600;
   color: #052795 !important;
 }
 
-.cell-value {
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.icon-btn {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+}
+
+.edit-btn {
+  color: #052795 !important;
+}
+
+.edit-btn:hover {
+  background: rgba(5, 39, 149, 0.1) !important;
+}
+
+.delete-btn {
+  color: #ef4444 !important;
+}
+
+.delete-btn:hover {
+  background: rgba(239, 68, 68, 0.1) !important;
+}
+
+.action-icon {
+  width: 18px !important;
+  height: 18px !important;
 }
 
 /* ============ MOBILE CARDS ============ */
@@ -256,6 +282,9 @@
 .data-card-header {
   background: linear-gradient(135deg, #052795 0%, #0842c4 100%);
   padding: 16px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .data-card-header h3 {
@@ -264,6 +293,19 @@
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.3px;
+}
+
+.ocupacion-badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ocupacion-badge.personal {
+  background: #10b981;
 }
 
 .data-card-body {
@@ -296,35 +338,31 @@
   font-size: 15px;
   color: #052795;
   font-weight: 700;
-  font-variant-numeric: tabular-nums;
 }
 
-/* ============ CHART ============ */
-.chart-wrapper {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px 16px;
+.actions-row {
+  display: flex;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 2px solid rgba(5, 39, 149, 0.1);
+}
+
+.mobile-action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mobile-icon {
+  width: 16px !important;
+  height: 16px !important;
 }
 
 /* ============ RESPONSIVE ============ */
-@media (max-width: 1400px) {
-  .content-grid {
-    grid-template-columns: 1.5fr 1fr;
-  }
-}
-
-@media (max-width: 1200px) {
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .chart-wrapper {
-    max-width: 450px;
-  }
-}
-
 @media (max-width: 960px) {
-  .dashboard-container {
+  .users-container {
     padding: 20px;
   }
 
@@ -332,26 +370,15 @@
     flex-direction: column;
   }
 
-  .filter-input {
-    width: 100%;
-  }
-
+  .search-input,
   .action-button {
     width: 100%;
-  }
-
-  ::ng-deep .mat-mdc-card-title {
-    font-size: 18px !important;
   }
 }
 
 @media (max-width: 768px) {
-  .dashboard-container {
+  .users-container {
     padding: 16px;
-    gap: 16px;
-  }
-
-  .content-grid {
     gap: 16px;
   }
 
@@ -359,8 +386,7 @@
     padding: 16px;
   }
 
-  ::ng-deep .table-card .mat-mdc-card-header,
-  ::ng-deep .chart-card .mat-mdc-card-header {
+  ::ng-deep .table-card .mat-mdc-card-header {
     padding: 16px 20px 12px !important;
   }
 
@@ -390,15 +416,10 @@
   .mobile-cards {
     display: block !important;
   }
-
-  .chart-wrapper {
-    max-width: 100%;
-    padding: 12px 8px;
-  }
 }
 
 @media (max-width: 600px) {
-  .dashboard-container {
+  .users-container {
     padding: 12px;
   }
 
@@ -406,8 +427,7 @@
     padding: 12px;
   }
 
-  ::ng-deep .table-card .mat-mdc-card-header,
-  ::ng-deep .chart-card .mat-mdc-card-header {
+  ::ng-deep .table-card .mat-mdc-card-header {
     padding: 14px 16px 10px !important;
   }
 
@@ -427,27 +447,5 @@
 
   ::ng-deep .mat-mdc-card-title {
     font-size: 16px !important;
-  }
-
-  .data-table {
-    min-width: 450px;
-  }
-
-  .data-table th,
-  .data-table td {
-    padding: 8px 6px !important;
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .prefix-icon {
-    width: 18px !important;
-    height: 18px !important;
-  }
-
-  .button-icon {
-    width: 16px !important;
-    height: 16px !important;
   }
 }

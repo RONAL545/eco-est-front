@@ -1,32 +1,31 @@
 <div class="sidebar">
+  <!-- Header con Logo -->
   <div class="sidebar-header">
     <div class="logo-container">
-      <mat-icon class="logo-icon">eco</mat-icon>
+      <div class="logo-icon-wrapper">
+        <lucide-icon [img]="Leaf" class="logo-icon"></lucide-icon>
+      </div>
       <div class="logo-text">
-        <span class="logo-unaj">Unaj</span>
-        <span class="logo-separator">-</span>
-        <span class="logo-ecotec">Ecotec</span>
+        <span class="logo-brand">UNAJ</span>
+        <span class="logo-subtitle">Eco Estadísticas</span>
       </div>
     </div>
   </div>
 
+  <!-- Navigation Menu -->
   <nav class="sidebar-nav">
-    <mat-list>
-      <mat-list-item *ngFor="let item of menuItems"
-                     [routerLink]="item.path"
-                     routerLinkActive="active"
-                     class="nav-item"
-                     (click)="onMenuItemClick()">
-        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
-        <span matListItemTitle>{{ item.label }}</span>
-      </mat-list-item>
-    </mat-list>
+    <div class="nav-items">
+      <a *ngFor="let item of menuItems"
+         [routerLink]="item.path"
+         routerLinkActive="active"
+         class="nav-item"
+         matRipple
+         [matRippleColor]="'rgba(255, 255, 255, 0.1)'">
+        <div class="nav-item-content">
+          <lucide-icon [img]="item.icon" class="nav-icon"></lucide-icon>
+          <span class="nav-label">{{ item.label }}</span>
+        </div>
+      </a>
+    </div>
   </nav>
-
-  <div class="sidebar-footer">
-    <button mat-button class="logout-button" (click)="logout()">
-      <mat-icon>logout</mat-icon>
-      <span>Cerrar sesión</span>
-    </button>
-  </div>
 </div>
