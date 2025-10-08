@@ -29,6 +29,10 @@
   min-width: 200px;
 }
 
+.filter-input.date-range {
+  min-width: 280px;
+}
+
 .prefix-icon {
   width: 20px !important;
   height: 20px !important;
@@ -116,6 +120,34 @@
 
 ::ng-deep .filters-section .mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
   color: #052795;
+}
+
+/* Date Range Picker styles */
+::ng-deep .mat-date-range-input-separator {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+::ng-deep .mat-date-range-input-inner {
+  font-size: 14px;
+}
+
+::ng-deep .mat-datepicker-content {
+  box-shadow: 0 8px 24px rgba(5, 39, 149, 0.15) !important;
+  border-radius: 12px !important;
+}
+
+::ng-deep .mat-calendar-header {
+  background: linear-gradient(135deg, #052795 0%, #0842c4 100%);
+  color: white;
+}
+
+::ng-deep .mat-calendar-body-selected {
+  background-color: #052795 !important;
+  color: white !important;
+}
+
+::ng-deep .mat-calendar-body-in-range::before {
+  background-color: rgba(5, 39, 149, 0.15) !important;
 }
 
 /* ============ CARDS ============ */

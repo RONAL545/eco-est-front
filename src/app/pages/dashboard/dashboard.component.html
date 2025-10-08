@@ -19,12 +19,15 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="filter-input">
-        <mat-label>Fecha</mat-label>
+      <mat-form-field appearance="outline" class="filter-input date-range">
+        <mat-label>Rango de Fechas</mat-label>
         <lucide-icon [img]="Calendar" matPrefix class="prefix-icon"></lucide-icon>
-        <input matInput [matDatepicker]="picker">
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-date-range-input [formGroup]="dateRangeForm" [rangePicker]="rangePicker">
+          <input matStartDate formControlName="start" placeholder="Fecha inicio">
+          <input matEndDate formControlName="end" placeholder="Fecha fin" (dateChange)="applyDateFilter()">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #rangePicker></mat-date-range-picker>
       </mat-form-field>
 
       <button mat-flat-button color="primary" class="action-button" (click)="exportData()">

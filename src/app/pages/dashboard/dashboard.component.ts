@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LucideAngularModule, Building2, DoorOpen, Calendar, Download, Table2, PieChart } from 'lucide-angular';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration } from 'chart.js';
@@ -26,6 +27,7 @@ import { ChartConfiguration } from 'chart.js';
     MatNativeDateModule,
     MatInputModule,
     MatRippleModule,
+    ReactiveFormsModule,
     LucideAngularModule,
     BaseChartDirective
   ],
@@ -40,6 +42,12 @@ export class DashboardComponent implements OnInit {
   readonly Download = Download;
   readonly Table2 = Table2;
   readonly PieChart = PieChart;
+
+  // Date Range Form
+  dateRangeForm = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null)
+  });
 
   displayedColumns: string[] = ['pabellon', 'plastico', 'carton', 'vidrio', 'organico', 'metal', 'no_aprovechable'];
 
@@ -68,6 +76,17 @@ export class DashboardComponent implements OnInit {
 
   exportData() {
     console.log('Exportando datos...');
+  }
+
+  applyDateFilter() {
+    const startDate = this.dateRangeForm.get('start')?.value;
+    const endDate = this.dateRangeForm.get('end')?.value;
+
+    if (startDate && endDate) {
+      console.log('Filtrar desde:', startDate, 'hasta:', endDate);
+      // Aquí puedes llamar a tu servicio para filtrar los datos
+      // this.reporteService.getReportesByDateRange(startDate, endDate).subscribe(...)
+    }
   }
 }
 
